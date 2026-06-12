@@ -1,25 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center text-primary/50 text-sm tracking-widest uppercase">
-      Loading 3D...
-    </div>
-  ),
 });
 
 export default function Hero() {
+  const [splineLoaded, setSplineLoaded] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.2,
+        delayChildren: 0.1,
       },
     },
   };
@@ -49,7 +47,7 @@ export default function Hero() {
       <div className="absolute bottom-10 right-1/4 w-[300px] h-[300px] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none z-0" />
 
       <div className="w-full flex flex-col md:flex-row items-start justify-between gap-12 relative z-10 ">
-        {/* Left Side: Text Content */}
+        {/* Left Side: Text Content — always visible immediately */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -66,7 +64,7 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[60px] font-extrabold leading-[1.05] tracking-[-0.04em] text-on-surface mb-8">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[64px] font-bold leading-[1.05] tracking-[0.01em] text-on-surface mb-8">
             <span className="block overflow-hidden py-1">
               <motion.span variants={textRowVariants} className="inline-block">
                 Hi, I&apos;m Shubhojit Deb
@@ -75,7 +73,7 @@ export default function Hero() {
             <span className="block overflow-hidden py-1">
               <motion.span variants={textRowVariants} className="inline-block">
                 I build{" "}
-                <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent font-black">
+                <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent font-serif italic font-normal">
                   exceptional
                 </span>
               </motion.span>
@@ -91,7 +89,7 @@ export default function Hero() {
             variants={elementVariants}
             className="text-muted text-base md:text-[18px] leading-relaxed max-w-2xl mb-12"
           >
-            Frontend Specialist & Full-Stack Developer based in Kolkata, India.
+            Frontend Specialist &amp; Full-Stack Developer based in Kolkata, India.
             Primarily focused on engineering highly performant, custom-animated
             interfaces while maintaining solid backend implementations.
           </motion.p>
@@ -118,14 +116,32 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Side: Spline 3D Model */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="lg:w-[45%] h-[400px] sm:h-[600px] relative z-10 "
-        >
-          <Spline scene="https://prod.spline.design/wTpLHcrC3aNV8r2c/scene.splinecode" />
-        </motion.div>
+        <div className="lg:w-[45%] h-[400px] sm:h-[600px] relative z-10 flex-shrink-0">
+          {/* Skeleton placeholder — shown while Spline loads */}
+          {!splineLoaded && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <div className="w-24 h-24 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full border-2 border-primary/40 border-t-primary animate-spin" />
+              </div>
+              <span className="text-primary/40 text-xs uppercase tracking-[0.2em]">
+                Loading 3D Scene
+              </span>
+            </div>
+          )}
+
+          {/* Spline fades in only after it's ready */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: splineLoaded ? 1 : 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="w-full h-full"
+          >
+            <Spline
+              scene="https://prod.spline.design/wTpLHcrC3aNV8r2c/scene.splinecode"
+              onLoad={() => setSplineLoaded(true)}
+            />
+          </motion.div>
+        </div>
       </div>
     </section>
   );

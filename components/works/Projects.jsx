@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Assets from "@/Assets/Assets.jsx";
 
 const projects = [
@@ -72,6 +73,8 @@ const projects = [
   },
 ];
 
+const INITIAL_COUNT = 6;
+
 const containerVariants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
@@ -87,6 +90,11 @@ const itemVariants = {
 };
 
 export default function Projects() {
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleProjects = showAll ? projects : projects.slice(0, INITIAL_COUNT);
+  const hasMore = projects.length > INITIAL_COUNT;
+
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -140,7 +148,7 @@ export default function Projects() {
         <div>
           <h2 className="font-display text-4xl md:text-6xl font-bold tracking-tight text-on-surface">
             Featured{" "}
-            <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent font-black">
+            <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent font-serif italic text-primary font-normal">
               Creations
             </span>
           </h2>
@@ -157,68 +165,98 @@ export default function Projects() {
         viewport={{ once: true, margin: "-60px" }}
         className="grid grid-cols-1 md:grid-cols-2 gap-8"
       >
-        {projects.map((p, idx) => (
-          <motion.div
-            key={p.title}
-            variants={itemVariants}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            onMouseEnter={handleMouseEnter}
-            className="group relative bg-surface-card backdrop-blur-[20px] border border-white/[0.08] rounded-2xl p-5 overflow-hidden cursor-pointer hover:border-primary/40 hover:bg-white/[0.03] transition-all duration-500 shadow-[0_15px_30px_-10px_rgba(0,0,0,0.6)]"
-            style={{ transformStyle: "preserve-3d" }}
-            data-cursor="project"
-            data-cursor-text="VISIT"
-            onClick={() => p.link && window.open(p.link, "_blank")}
-          >
-            <div className="card-glare absolute inset-0 pointer-events-none rounded-2xl z-20" />
-
-            <div
-              className="w-full h-64 md:h-80 rounded-xl overflow-hidden mb-6 bg-surface-high relative"
-              style={{ transform: "translateZ(30px)" }}
+        <AnimatePresence mode="popLayout">
+          {visibleProjects.map((p, idx) => (
+            <motion.div
+              key={p.title}
+              variants={itemVariants}
+              initial="hidden"
+              animate="show"
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.3 } }}
+              layout
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              onMouseEnter={handleMouseEnter}
+              className="group relative bg-surface-card backdrop-blur-[20px] border border-white/[0.08] rounded-2xl p-5 overflow-hidden cursor-pointer hover:border-primary/40 hover:bg-white/[0.03] transition-all duration-500 shadow-[0_15px_30px_-10px_rgba(0,0,0,0.6)]"
+              style={{ transformStyle: "preserve-3d" }}
+              data-cursor="project"
+              data-cursor-text="VISIT"
+              onClick={() => p.link && window.open(p.link, "_blank")}
             >
-              <Image
-                src={p.image}
-                alt={p.title}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority={idx < 2}
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 flex items-center justify-center">
-                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-500 shadow-[0_0_20px_rgba(0,102,255,0.6)]">
-                  <ArrowUpRight size={20} className="text-white" />
+              <div className="card-glare absolute inset-0 pointer-events-none rounded-2xl z-20" />
+
+              <div
+                className="w-full h-64 md:h-80 rounded-xl overflow-hidden mb-6 bg-surface-high relative"
+                style={{ transform: "translateZ(30px)" }}
+              >
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={idx < 2}
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-500 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-500 shadow-[0_0_20px_rgba(0,102,255,0.6)]">
+                    <ArrowUpRight size={20} className="text-white" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              className="flex justify-between items-start px-2 pb-2"
-              style={{ transform: "translateZ(20px)" }}
-            >
-              <div className="flex-1 pr-4">
-                <h3 className="font-display text-xl md:text-2xl font-bold text-on-surface leading-snug">
-                  {p.title}
-                </h3>
-                <p className="text-muted text-sm mt-1">{p.category}</p>
+              <div
+                className="flex justify-between items-start px-2 pb-2"
+                style={{ transform: "translateZ(20px)" }}
+              >
+                <div className="flex-1 pr-4">
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-on-surface leading-snug">
+                    {p.title}
+                  </h3>
+                  <p className="text-muted text-sm mt-1">{p.category}</p>
 
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {p.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[10px] bg-white/[0.04] text-muted border border-white/[0.06] px-2 py-0.5 rounded-md"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {p.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="text-[10px] bg-white/[0.04] text-muted border border-white/[0.06] px-2 py-0.5 rounded-md"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+                <span className="text-[11px] uppercase tracking-[0.1em] text-muted border border-muted/20 px-3 py-1 rounded-full whitespace-nowrap">
+                  {p.year}
+                </span>
               </div>
-              <span className="text-[11px] uppercase tracking-[0.1em] text-muted border border-muted/20 px-3 py-1 rounded-full whitespace-nowrap">
-                {p.year}
-              </span>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </motion.div>
+
+      {/* See More / Show Less */}
+      {hasMore && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex justify-center mt-12"
+        >
+          <button
+            onClick={() => setShowAll(!showAll)}
+            data-cursor="hover"
+            className="group inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.15em] font-semibold border border-white/15 text-muted hover:text-white hover:border-primary/50 px-8 py-4 rounded-xl transition-all duration-300 hover:bg-primary/5 hover:shadow-[0_0_30px_rgba(0,102,255,0.1)]"
+          >
+            <span>{showAll ? "Show Less" : `See More (${projects.length - INITIAL_COUNT}+)`}</span>
+            <motion.span
+              animate={{ rotate: showAll ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown size={16} />
+            </motion.span>
+          </button>
+        </motion.div>
+      )}
     </section>
   );
 }

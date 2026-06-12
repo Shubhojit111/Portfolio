@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Check, Loader2, Mail } from "lucide-react";
+import { Send, Check, Loader2, Mail, CheckCircle2 } from "lucide-react";
 
 // Inline SVG components for robust cross-version compatibility
 const LinkedInIcon = (props) => (
@@ -41,6 +41,7 @@ export default function Contact() {
   const [formState, setFormState] = useState("idle"); // idle, sending, success
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [focusedField, setFocusedField] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,9 +52,13 @@ export default function Contact() {
     setTimeout(() => {
       setFormState("success");
       setFormData({ name: "", email: "", message: "" });
+      setShowToast(true);
       setTimeout(() => {
         setFormState("idle");
       }, 3000);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000);
     }, 1800);
   };
 
@@ -64,6 +69,40 @@ export default function Contact() {
 
   return (
     <section id="contact" className="px-6 md:px-16 py-24 max-w-[1440px] mx-auto">
+      {/* Success Toast Notification */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: -40, x: "-50%" }}
+            animate={{ opacity: 1, y: 0, x: "-50%" }}
+            exit={{ opacity: 0, y: -40, x: "-50%" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed top-8 left-1/2 z-[200] flex items-center gap-3 bg-emerald-500/15 border border-emerald-400/30 backdrop-blur-2xl text-white px-6 py-4 rounded-2xl shadow-[0_20px_60px_rgba(16,185,129,0.3)]"
+          >
+            <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+              <CheckCircle2 size={18} className="text-white" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold">Message Sent Successfully!</p>
+              <p className="text-xs text-emerald-200/70 mt-0.5">Thanks for reaching out. I&apos;ll get back to you soon.</p>
+            </div>
+            <button
+              onClick={() => setShowToast(false)}
+              className="ml-4 text-white/40 hover:text-white transition-colors text-lg leading-none"
+            >
+              ×
+            </button>
+            {/* Progress bar */}
+            <motion.div
+              initial={{ scaleX: 1 }}
+              animate={{ scaleX: 0 }}
+              transition={{ duration: 5, ease: "linear" }}
+              className="absolute bottom-0 left-0 right-0 h-[2px] bg-emerald-400/50 origin-left rounded-b-2xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

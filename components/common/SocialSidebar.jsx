@@ -33,19 +33,18 @@ export default function SocialSidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div 
-      className="fixed right-6 top-1/2 z-[100] flex flex-col items-center gap-4"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+    <div
+      className="fixed right-6 bottom-16 z-[100] flex flex-col items-center gap-3"
     >
+      {/* Social links container */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: "auto" }}
-            exit={{ opacity: 0, y: 20, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col gap-3 overflow-hidden py-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="flex flex-col gap-3 pb-2"
           >
             {socials.map((social, index) => (
               <motion.a
@@ -53,16 +52,15 @@ export default function SocialSidebar() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.5, x: 20 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 0.5, x: 20 }}
-                transition={{ 
-                  delay: (socials.length - 1 - index) * 0.05,
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20
+                initial={{ opacity: 0, scale: 0.3, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.3, y: 10 }}
+                transition={{
+                  delay: index * 0.04,
+                  duration: 0.25,
+                  ease: [0.16, 1, 0.3, 1],
                 }}
-                className={`w-10 h-10 rounded-full bg-surface-card border border-white/10 flex items-center justify-center text-muted backdrop-blur-md transition-all duration-300 ${social.color} shadow-[0_5px_15px_rgba(0,0,0,0.3)]`}
+                className={`w-10 h-10 rounded-full bg-surface-card border border-white/10 flex items-center justify-center text-muted backdrop-blur-md transition-colors duration-300 ${social.color} shadow-[0_5px_15px_rgba(0,0,0,0.3)]`}
                 title={social.name}
               >
                 <social.icon size={18} />
@@ -71,24 +69,19 @@ export default function SocialSidebar() {
           </motion.div>
         )}
       </AnimatePresence>
-      
-      <motion.div 
-        className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white cursor-pointer shadow-[0_0_20px_rgba(0,102,255,0.4)] relative z-10"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+
+      {/* Toggle button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white cursor-pointer shadow-[0_0_20px_rgba(0,102,255,0.4)] relative z-10 transition-transform duration-200 hover:scale-105 active:scale-95"
       >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={isOpen ? "close" : "open"}
-            initial={{ opacity: 0, rotate: -90 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            exit={{ opacity: 0, rotate: 90 }}
-            transition={{ duration: 0.2 }}
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </motion.div>
-        </AnimatePresence>
-      </motion.div>
+        <motion.div
+          animate={{ rotate: isOpen ? 90 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </motion.div>
+      </button>
     </div>
   );
 }
