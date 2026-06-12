@@ -1,0 +1,19 @@
+
+> dev
+> npm --prefix portfolio run dev
+
+
+> portfolio@0.1.0 dev
+> next dev -H localhost -p 3000
+
+▲ Next.js 16.2.7 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://localhost:3000
+✓ Ready in 687ms
+Creating turbopack project {
+  dir: 'C:\\Users\\User\\Desktop\\Portfolio\\portfolio',
+  testMode: true
+}
+
+○ Compiling / ...
+ GET / 200 in 4.6s (next.js: 4.3s, application-code: 278ms)

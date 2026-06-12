@@ -1,0 +1,654 @@
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headCacheNode={{rsc:{...}, ...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <div
+                        hidden={true}
+-                       bis_skin_checked="1"
+                      >
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.js">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="h-full ant...">
+                          <body
+                            className="min-h-full flex flex-col"
+-                           cz-shortcut-listen="true"
+-                           __processed_0ffc9995-f3e2-482d-8d69-d44e89348dbe__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            ...
+                              <Home>
+                                <Navbar>
+                                  <motion.nav initial={{y:-100}} animate={{y:0}} transition={{duration:0.7, ...}} ...>
+                                    <nav className="fixed top-..." style={{...}} ref={function useMotionRef.useCallback}>
+                                      <div
+                                        className="flex justify-between items-center px-6 md:px-16 py-5 max-w-[1440px]..."
+-                                       bis_skin_checked="1"
+                                      >
+                                        <a>
+                                        <div
+                                          className="hidden lg:flex gap-8 items-center"
+-                                         bis_skin_checked="1"
+                                        >
+                                        <div
+                                          className="hidden lg:flex gap-4 items-center"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <div
+                                            className="flex items-center gap-2 text-[11px] uppercase tracking-[0.15em]..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                        ...
+                                  ...
+                                <main className="min-h-screen">
+                                  <Hero>
+                                    <section className="relative p...">
+                                      <div
+                                        className="absolute top-20 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-f..."
+-                                       bis_skin_checked="1"
+                                      >
+                                      <motion.div initial={{opacity:0,y:40}} animate={{opacity:1,y:0}} ...>
+                                        <div
+                                          className="max-w-5xl relative z-10"
+                                          style={{opacity:0,transform:"translateY..."}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <h1>
+                                          <p>
+                                          <div
+                                            className="flex flex-col sm:flex-row gap-4"
+-                                           bis_skin_checked="1"
+                                          >
+                                  <Services>
+                                    <section id="services" className="px-6 md:px...">
+                                      <motion.div variants={{hidden:{}, ...}} initial="hidden" whileInView="show" ...>
+                                        <div
+                                          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                                          style={{}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <motion.div variants={{hidden:{...}, ...}} className="group rela...">
+                                            <div
+                                              className="group relative bg-surface-card backdrop-blur-[30px] border bo..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                          <motion.div variants={{hidden:{...}, ...}} className="group rela...">
+                                            <div
+                                              className="group relative bg-surface-card backdrop-blur-[30px] border bo..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                          <motion.div variants={{hidden:{...}, ...}} className="group rela...">
+                                            <div
+                                              className="group relative bg-surface-card backdrop-blur-[30px] border bo..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                  <Marquee>
+                                    <section className="py-12 bord...">
+                                      <div
+                                        className="flex animate-marquee whitespace-nowrap"
+-                                       bis_skin_checked="1"
+                                      >
+                                  <Projects>
+                                    <section id="projects" className="px-6 md:px...">
+                                      <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} ...>
+                                        <div
+                                          className="flex justify-between items-end mb-12"
+                                          style={{opacity:0,transform:"translateY..."}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                      <motion.div variants={{hidden:{}, ...}} initial="hidden" whileInView="show" ...>
+                                        <div
+                                          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                                          style={{}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <motion.div variants={{hidden:{...}, ...}} className="group rela...">
+                                            <div
+                                              className="group relative bg-surface-card backdrop-blur-[30px] border bo..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="w-full h-64 md:h-80 rounded-lg overflow-hidden mb-6 bg-surf..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <img>
+                                                <div
+                                                  className="absolute inset-0 bg-black/0 group-hover:bg-black/30 trans..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="w-12 h-12 rounded-full bg-primary flex items-center jus..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                              <div
+                                                className="flex justify-between items-end px-2 pb-2"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                          <motion.div variants={{hidden:{...}, ...}} className="group rela...">
+                                            <div
+                                              className="group relative bg-surface-card backdrop-blur-[30px] border bo..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="w-full h-64 md:h-80 rounded-lg overflow-hidden mb-6 bg-surf..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <img>
+                                                <div
+                                                  className="absolute inset-0 bg-black/0 group-hover:bg-black/30 trans..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="w-12 h-12 rounded-full bg-primary flex items-center jus..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                              <div
+                                                className="flex justify-between items-end px-2 pb-2"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                          <motion.div variants={{hidden:{...}, ...}} className="group rela...">
+                                            <div
+                                              className="group relative bg-surface-card backdrop-blur-[30px] border bo..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="w-full h-64 md:h-80 rounded-lg overflow-hidden mb-6 bg-surf..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <img>
+                                                <div
+                                                  className="absolute inset-0 bg-black/0 group-hover:bg-black/30 trans..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="w-12 h-12 rounded-full bg-primary flex items-center jus..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                              <div
+                                                className="flex justify-between items-end px-2 pb-2"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                          <motion.div variants={{hidden:{...}, ...}} className="group rela...">
+                                            <div
+                                              className="group relative bg-surface-card backdrop-blur-[30px] border bo..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="w-full h-64 md:h-80 rounded-lg overflow-hidden mb-6 bg-surf..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <img>
+                                                <div
+                                                  className="absolute inset-0 bg-black/0 group-hover:bg-black/30 trans..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="w-12 h-12 rounded-full bg-primary flex items-center jus..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                              <div
+                                                className="flex justify-between items-end px-2 pb-2"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                  <About>
+                                    <section id="about" className="px-6 md:px...">
+                                      <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} ...>
+                                        <div
+                                          className="mb-16"
+                                          style={{opacity:0,transform:"translateY..."}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                  <Stats>
+                                    <section className="px-6 md:px...">
+                                      <div
+                                        className="grid grid-cols-2 md:grid-cols-4 gap-4"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                          <div
+                                            className="bg-surface-card backdrop-blur-[30px] border border-white/[0.08]..."
+                                            style={{opacity:0,transform:"translateY..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <Star>
+                                            <div
+                                              className="font-display text-3xl md:text-4xl font-bold text-on-surface mb-2"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="text-muted text-xs uppercase tracking-[0.12em] font-medium"
+-                                             bis_skin_checked="1"
+                                            >
++                                             Projects Completed
+                                        <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                          <div
+                                            className="bg-surface-card backdrop-blur-[30px] border border-white/[0.08]..."
+                                            style={{opacity:0,transform:"translateY..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <Trophy>
+                                            <div
+                                              className="font-display text-3xl md:text-4xl font-bold text-on-surface mb-2"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="text-muted text-xs uppercase tracking-[0.12em] font-medium"
+-                                             bis_skin_checked="1"
+                                            >
++                                             Happy Clients
+                                        <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                          <div
+                                            className="bg-surface-card backdrop-blur-[30px] border border-white/[0.08]..."
+                                            style={{opacity:0,transform:"translateY..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <Award>
+                                            <div
+                                              className="font-display text-3xl md:text-4xl font-bold text-on-surface mb-2"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="text-muted text-xs uppercase tracking-[0.12em] font-medium"
+-                                             bis_skin_checked="1"
+                                            >
++                                             Awards Won
+                                        <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} ...>
+                                          <div
+                                            className="bg-surface-card backdrop-blur-[30px] border border-white/[0.08]..."
+                                            style={{opacity:0,transform:"translateY..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <Medal>
+                                            <div
+                                              className="font-display text-3xl md:text-4xl font-bold text-on-surface mb-2"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="text-muted text-xs uppercase tracking-[0.12em] font-medium"
+-                                             bis_skin_checked="1"
+                                            >
++                                             Years Experience
+                                  <Awards>
+                                    <section id="awards" className="px-6 md:px...">
+                                      <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} ...>
+                                        <div
+                                          className="mb-8"
+                                          style={{opacity:0,transform:"translateY..."}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                      <div
+                                        className="space-y-0"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <motion.div initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} ...>
+                                          <div
+                                            className="flex items-center justify-between py-5 border-b border-white/[0..."
+                                            style={{opacity:0,transform:"translateX..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="flex items-center gap-4"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="flex items-center gap-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                        <motion.div initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} ...>
+                                          <div
+                                            className="flex items-center justify-between py-5 border-b border-white/[0..."
+                                            style={{opacity:0,transform:"translateX..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="flex items-center gap-4"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="flex items-center gap-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                        <motion.div initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} ...>
+                                          <div
+                                            className="flex items-center justify-between py-5 border-b border-white/[0..."
+                                            style={{opacity:0,transform:"translateX..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="flex items-center gap-4"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="flex items-center gap-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                        <motion.div initial={{opacity:0,x:-20}} whileInView={{opacity:1,x:0}} ...>
+                                          <div
+                                            className="flex items-center justify-between py-5 border-b border-white/[0..."
+                                            style={{opacity:0,transform:"translateX..."}}
+                                            ref={function useMotionRef.useCallback}
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="flex items-center gap-4"
+-                                             bis_skin_checked="1"
+                                            >
+                                            <div
+                                              className="flex items-center gap-6"
+-                                             bis_skin_checked="1"
+                                            >
+                                  <Testimonials>
+                                    <section id="testimonials" className="px-6 md:px...">
+                                      <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} ...>
+                                        <div
+                                          className="mb-12"
+                                          style={{opacity:0,transform:"translateY..."}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                      <motion.div variants={{hidden:{}, ...}} initial="hidden" whileInView="show" ...>
+                                        <div
+                                          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+                                          style={{}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <motion.div variants={{hidden:{...}, ...}} className="group bg-s...">
+                                            <div
+                                              className="group bg-surface-card backdrop-blur-[30px] border border-whit..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+                                                className="flex items-center gap-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/40 ..."
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 SM
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="text-on-surface text-sm font-semibold"
+-                                                   bis_skin_checked="1"
+                                                  >
++                                                   Sarah Mitchell
+                                                  <div
+                                                    className="text-muted text-xs"
+-                                                   bis_skin_checked="1"
+                                                  >
++                                                   CEO, Lumina Studio
+                                          <motion.div variants={{hidden:{...}, ...}} className="group bg-s...">
+                                            <div
+                                              className="group bg-surface-card backdrop-blur-[30px] border border-whit..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+                                                className="flex items-center gap-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/40 ..."
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 JC
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="text-on-surface text-sm font-semibold"
+-                                                   bis_skin_checked="1"
+                                                  >
++                                                   James Chen
+                                                  <div
+                                                    className="text-muted text-xs"
+-                                                   bis_skin_checked="1"
+                                                  >
++                                                   Founder, NexTech
+                                          <motion.div variants={{hidden:{...}, ...}} className="group bg-s...">
+                                            <div
+                                              className="group bg-surface-card backdrop-blur-[30px] border border-whit..."
+                                              style={{opacity:0,transform:"translateY..."}}
+                                              ref={function useMotionRef.useCallback}
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+                                                className="flex items-center gap-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/40 ..."
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 ER
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="text-on-surface text-sm font-semibold"
+-                                                   bis_skin_checked="1"
+                                                  >
++                                                   Elena Rodriguez
+                                                  <div
+                                                    className="text-muted text-xs"
+-                                                   bis_skin_checked="1"
+                                                  >
++                                                   CMO, Aether Labs
+                                  <Pricing>
+                                    <section id="pricing" className="px-6 md:px...">
+                                      <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} ...>
+                                        <div
+                                          className="mb-12 flex flex-col md:flex-row md:items-end md:justify-between g..."
+                                          style={{opacity:0,transform:"translateY..."}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <div
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                      <div
+                                        className="grid grid-cols-1 lg:grid-cols-3 gap-4"
+-                                       bis_skin_checked="1"
+                                      >
+                                        <motion.article initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} ...>
+                                          <article className="relative r..." style={{opacity:0, ...}} ...>
+                                            <h3>
+                                            <p>
+                                            <div
+                                              className="font-display text-4xl font-bold text-on-surface mb-8"
+-                                             bis_skin_checked="1"
+                                            >
++                                             $2.4k
+                                            ...
+                                        <motion.article initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} ...>
+                                          <article className="relative r..." style={{opacity:0, ...}} ...>
+                                            <div
+                                              className="absolute right-6 top-6 flex items-center gap-2 text-[10px] up..."
+-                                             bis_skin_checked="1"
+                                            >
+                                            <h3>
+                                            <p>
+                                            <div
+                                              className="font-display text-4xl font-bold text-on-surface mb-8"
+-                                             bis_skin_checked="1"
+                                            >
++                                             $5.8k
+                                            ...
+                                        <motion.article initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} ...>
+                                          <article className="relative r..." style={{opacity:0, ...}} ...>
+                                            <h3>
+                                            <p>
+                                            <div
+                                              className="font-display text-4xl font-bold text-on-surface mb-8"
+-                                             bis_skin_checked="1"
+                                            >
++                                             $9.5k+
+                                            ...
+                                  <Contact>
+                                    <section id="contact" className="px-6 md:px...">
+                                      <motion.div initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} ...>
+                                        <div
+                                          className="bg-surface-card backdrop-blur-[30px] border border-white/[0.08] r..."
+                                          style={{opacity:0,transform:"translateY..."}}
+                                          ref={function useMotionRef.useCallback}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <div
+                                            className="absolute -top-32 -right-32 w-80 h-80 bg-primary/10 rounded-full..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="absolute -bottom-32 -left-32 w-64 h-64 bg-primary/5 rounded-ful..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+-                                             bis_skin_checked="1"
+                                            >
+                                              <h2>
+                                              <p>
+                                              <div
+                                                className="flex gap-4"
+-                                               bis_skin_checked="1"
+                                              >
+                                            <form onSubmit={function _ContactFormOnSubmit} className="space-y-6">
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                              ...
+                                <Footer>
+                                  <footer className="border-t b...">
+                                    <div
+                                      className="max-w-[1440px] mx-auto"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        className="flex flex-col md:flex-row justify-between items-start md:items-cent..."
+-                                       bis_skin_checked="1"
+                                      >
+                                        <a>
+                                        <div
+                                          className="flex flex-wrap gap-6"
+-                                         bis_skin_checked="1"
+                                        >
+                                      <div
+                                        className="h-[0.5px] bg-white/[0.06] w-full mb-8"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex flex-col md:flex-row justify-between items-center gap-4"
+-                                       bis_skin_checked="1"
+                                      >
+                  ...
+ 
