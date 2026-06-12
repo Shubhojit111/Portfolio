@@ -24,8 +24,8 @@ const InstagramIcon = (props) => (
 const socials = [
   { name: "GitHub", icon: GithubIcon, href: "https://github.com/Shubhojit111", color: "hover:text-white hover:bg-white/10" },
   { name: "LinkedIn", icon: LinkedinIcon, href: "https://linkedin.com", color: "hover:text-[#0a66c2] hover:bg-[#0a66c2]/10" },
-  { name: "Facebook", icon: FacebookIcon, href: "https://facebook.com", color: "hover:text-[#1877f2] hover:bg-[#1877f2]/10" },
-  { name: "Instagram", icon: InstagramIcon, href: "https://instagram.com", color: "hover:text-[#e4405f] hover:bg-[#e4405f]/10" },
+  { name: "Facebook", icon: FacebookIcon, href: "https://www.facebook.com/shubhojitdeb.YES", color: "hover:text-[#1877f2] hover:bg-[#1877f2]/10" },
+  { name: "Instagram", icon: InstagramIcon, href: "https://www.instagram.com/hiits.deb/", color: "hover:text-[#e4405f] hover:bg-[#e4405f]/10" },
   { name: "WhatsApp", icon: MessageCircle, href: "https://whatsapp.com", color: "hover:text-[#25d366] hover:bg-[#25d366]/10" },
 ];
 
