@@ -182,7 +182,7 @@ export default function Contact() {
                 htmlFor="name"
                 className={`absolute left-5 transition-all duration-300 pointer-events-none uppercase tracking-widest font-semibold text-[10px] ${
                   focusedField === "name" || formData.name
-                    ? "-top-2.5 left-3 bg-background px-2 text-primary"
+                    ? "-top-2.5 left-3 bg-background rounded-sm px-2 text-primary"
                     : "top-4 text-muted/60"
                 }`}
               >
@@ -207,7 +207,7 @@ export default function Contact() {
                 htmlFor="email"
                 className={`absolute left-5 transition-all duration-300 pointer-events-none uppercase tracking-widest font-semibold text-[10px] ${
                   focusedField === "email" || formData.email
-                    ? "-top-2.5 left-3 bg-background px-2 text-primary"
+                    ? "-top-2.5 left-3 bg-background rounded-sm px-2 text-primary"
                     : "top-4 text-muted/60"
                 }`}
               >
@@ -232,7 +232,7 @@ export default function Contact() {
                 htmlFor="message"
                 className={`absolute left-5 transition-all duration-300 pointer-events-none uppercase tracking-widest font-semibold text-[10px] ${
                   focusedField === "message" || formData.message
-                    ? "-top-2.5 left-3 bg-background px-2 text-primary"
+                    ? "-top-2.5 left-3 bg-background rounded-sm px-2 text-primary"
                     : "top-4 text-muted/60"
                 }`}
               >

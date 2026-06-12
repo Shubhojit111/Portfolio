@@ -59,7 +59,7 @@ export default function Hero() {
               variants={elementVariants}
               className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] font-semibold text-primary bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5"
             >
-              <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
               Frontend-focused Full-Stack Developer
             </motion.div>
           </div>
@@ -73,7 +73,7 @@ export default function Hero() {
             <span className="block overflow-hidden py-1">
               <motion.span variants={textRowVariants} className="inline-block">
                 I build{" "}
-                <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent font-serif italic font-normal">
+                <span className="bg-linear-to-r from-primary to-cyan-400 bg-clip-text text-transparent font-serif italic font-normal">
                   exceptional
                 </span>
               </motion.span>

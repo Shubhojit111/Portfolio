@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Navbar from "@/components/layout/Navbar";
@@ -22,29 +22,46 @@ import PreFooterSpline from "@/components/layout/PreFooterSpline";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
+  const [displayProgress, setDisplayProgress] = useState(0);
+  const progressRef = useRef(0);
+  const rafRef = useRef(null);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + Math.floor(Math.random() * 12) + 2;
-        if (next >= 100) {
-          clearInterval(timer);
-          setTimeout(() => setLoading(false), 400);
-          return 100;
-        }
-        return next;
-      });
-    }, 45);
-    return () => clearInterval(timer);
+    const duration = 1400; // total loading time in ms
+    const start = performance.now();
+
+    const tick = (now) => {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      // ease-out curve for smooth deceleration
+      const eased = 1 - Math.pow(1 - t, 3);
+      const value = Math.round(eased * 100);
+
+      if (value !== progressRef.current) {
+        progressRef.current = value;
+        setDisplayProgress(value);
+      }
+
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        setTimeout(() => setLoading(false), 400);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   return (
     <>
       {/* Animated Entrance Preloader */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {loading && (
           <motion.div
+            key="preloader"
             initial={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
@@ -61,9 +78,20 @@ export default function Home() {
                   Shubhojit Deb &copy; 2026
                 </p>
               </div>
-              <div className="font-display text-8xl md:text-[140px] font-black text-on-surface tracking-tighter leading-none select-none">
-                {Math.min(progress, 100)}%
+              <div
+                className="font-display text-8xl md:text-[140px] font-black text-on-surface tracking-tighter leading-none select-none"
+                style={{ fontVariantNumeric: "tabular-nums", minWidth: "3ch", textAlign: "right" }}
+              >
+                {displayProgress}%
               </div>
+            </div>
+
+            {/* Bottom progress bar */}
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/[0.06]">
+              <div
+                className="h-full bg-primary transition-transform duration-100 ease-out origin-left"
+                style={{ transform: `scaleX(${displayProgress / 100})` }}
+              />
             </div>
           </motion.div>
         )}
@@ -73,30 +101,28 @@ export default function Home() {
       <CustomCursor />
       <ParticlesBg />
 
-      {/* Main Page Layout */}
-      {!loading && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Navbar />
-          <main className="min-h-screen relative z-10">
-            <Hero />
-            <Services />
-            <Marquee />
-            <Projects />
-            <Journey />
-            <About />
-            <Stats />
-            <Testimonials />
-            <Pricing />
-            <Contact />
-            <PreFooterSpline />
-          </main>
-          <Footer />
-        </motion.div>
-      )}
+      {/* Main Page Layout — always mounted, fades in after preloader exits */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loading ? 0 : 1 }}
+        transition={{ duration: 0.5, delay: loading ? 0 : 0.3 }}
+      >
+        <Navbar />
+        <main className="min-h-screen relative z-10">
+          <Hero />
+          <Services />
+          <Marquee />
+          <Projects />
+          <Journey />
+          <About />
+          <Stats />
+          <Testimonials />
+          <Pricing />
+          <Contact />
+          <PreFooterSpline />
+        </main>
+        <Footer />
+      </motion.div>
     </>
   );
 }
