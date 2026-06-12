@@ -34,7 +34,7 @@ export default function SocialSidebar() {
 
   return (
     <div
-      className="fixed right-6 bottom-16 z-[100] flex flex-col items-center gap-3"
+      className="fixed right-6 bottom-8 z-[100] flex flex-col items-center gap-3"
     >
       {/* Social links container */}
       <AnimatePresence>
