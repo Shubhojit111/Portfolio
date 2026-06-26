@@ -13,7 +13,7 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
 
 export default function PreFooterSpline() {
   return (
-    <section className="relative w-full h-[400px] md:h-[600px] bg-surface-lowest overflow-hidden flex items-center justify-center border-t border-white/[0.06]">
+    <section className="relative w-full hidden md:block md:h-[600px] bg-surface-lowest overflow-hidden flex items-center justify-center border-t border-white/[0.06]">
       {/* Background gradients for blending */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 blur-[120px] pointer-events-none z-0" />
       
